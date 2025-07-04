@@ -1,0 +1,1 @@
+#include "catalogue/ecs/EntityManager.hpp"
