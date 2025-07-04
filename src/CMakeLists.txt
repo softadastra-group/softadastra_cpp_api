@@ -2,6 +2,7 @@
 add_subdirectory(utils)
 add_subdirectory(tools)
 add_subdirectory(catalogue) 
+add_subdirectory(payments)
 
 # Fichiers sources principaux
 file(GLOB_RECURSE SRC_FILES 
@@ -17,6 +18,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     catalogue    
     utils
     tools
+    payments
     OpenSSL::SSL
     OpenSSL::Crypto
     SQLite::SQLite3
