@@ -70,7 +70,9 @@ namespace catalogue {
                         throw std::invalid_argument("Custom fields must not have empty keys or values.");
                 }
 
-                // No strict validation on sizeIds, colorIds, or similarProducts for now.
+                (void)sizeIds;
+                (void)colorIds;
+                (void)similarProducts;
             }
         };
 

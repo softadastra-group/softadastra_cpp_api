@@ -1,123 +1,115 @@
-# ⚙️ Softadastra – C++ Backend API
+# 🚀 Softadastra C++ Backend
 
-**High-performance backend for the Softadastra platform**, built entirely in **modern C++17**.  
-It uses [Crow](https://github.com/CrowCpp/Crow) as the HTTP framework, **Boost.Beast** for low-level networking, and integrates with **OpenSSL**, **SQLite3**, and **MySQL C++ Connector** for security and data persistence.
-
----
-
-## 🧱 Project Overview
-
-This repository contains the full backend API of **Softadastra**, optimized for speed, modularity, and scalability.
-
-🔹 Key Features:
-
-- RESTful APIs for sellers, products, orders, payments, chat, and notifications  
-- Dual database support: SQLite3 (local dev) and MySQL (production)  
-- Secure communication via OpenSSL  
-- Modular architecture with isolated services  
-- Full test suite using GoogleTest
+This repository contains the C++ backend services for the **Softadastra** platform.  
+It is built for high performance, modularity, and real-world scalability across categories, catalogue, payments, and more.
 
 ---
 
-## 📁 Project Structure
+## 📦 Project Structure
 
-├── CMakeLists.txt # Main build configuration
-├── include/ # Shared headers
-├── src/ # Core source code (routes, services, handlers)
-├── Crow/ # Crow HTTP framework (optional local copy)
-├── lib/ # Custom or third-party libraries
-├── config/ # Configuration files (JSON, ENV)
-├── test/ # Functional test scenarios
-├── unittests/ # Unit tests with GoogleTest
-├── tools/ # Developer tools and utilities
-├── build/ # CMake build output (ignored in Git)
-└── README.md # Project documentation
+softadastra_cpp_api/
+├── CMakeLists.txt # Root CMake configuration
+├── Crow/ # Crow HTTP framework (header-only)
+├── include/ # All shared public headers
+│ ├── utils/ # Utilities (Logger, EnvLoader, etc.)
+│ ├── tools/ # Image processing and helpers
+│ ├── payments/ # Payment interfaces and models
+│ ├── catalogue/ # ECS entities and systems
+│ └── categories/ # Categories service and routes
+├── src/ # Module implementations
+│ ├── utils/ # Logger, EnvLoader, etc.
+│ ├── tools/ # Image compression, OpenCV tools
+│ ├── payments/ # Payment API, controllers, services
+│ ├── catalogue/ # Catalogue logic, ECS
+│ ├── categories/ # Category routes and repository
+│ └── main.cpp # Application entry point
+└── config/
+└── data/
+└── leaf_categories.json # Local JSON category data
 
 ---
 
-## 🛠️ Prerequisites
+## 🧱 Dependencies
 
-You must have the following installed:
+| Library         | Purpose                                   |
+|-----------------|-------------------------------------------|
+| Crow            | REST API framework                        |
+| OpenSSL         | Secure hashing, encryption, SSL support   |
+| SQLite3         | Lightweight embedded database (optional)  |
+| MySQL Connector | Persistent database (products, payments)  |
+| OpenCV          | Image processing and compression tools    |
+| nlohmann/json   | Modern JSON parsing                       |
+| GoogleTest      | Unit testing framework                    |
 
-- CMake ≥ 3.14  
-- A C++17-compatible compiler (GCC or Clang)  
-- OpenSSL  
-- SQLite3  
-- MySQL Connector C++  
-- Git
+---
 
-### ▶️ Install on Ubuntu/Debian:
+## 🛠 Build Instructions
+
+### 1. Clone the repository
 
 ```bash
-sudo apt update
-sudo apt install build-essential cmake libssl-dev libsqlite3-dev libmysqlcppconn-dev
+git clone https://github.com/softadastra-group/softadastra_cpp_api.git
+cd softadastra_cpp_api
 
-⚙️ Building the Project
-From the root of this repository:
+2. Create the build directory and configure CMake
 
-mkdir -p build
-cd build
-cmake .. -DENABLE_SANITIZERS=ON -DBUILD_TESTS=ON
+mkdir -p build && cd build
+cmake .. -DENABLE_SANITIZERS=ON -DENABLE_OPTIMIZATION=OFF
+You can enable -DENABLE_OPTIMIZATION=ON for production-ready builds.
+
+3. Build the project
+
 make -j$(nproc)
 
-The compiled binary will be located at:
-./build/bin/Softadastra
+4. Run the application
 
-🚀 Running the Backend
-To run the API server:
+./bin/Softadastra
+
+🌍 Environment Configuration
+Create a .env file at the root level with the following variables:
+
+CATEGORY_JSON_PATH=../config/data/leaf_categories.json
+
+This allows the app to load static resources such as category data using environment-based paths.
+
+🔌 API Endpoints (Crow)
+Method	Route	Description
+GET	/api/categories/leaf	List leaf-level product categories
+...	(more coming soon)	Payments, products, vendors...
+
+All endpoints include automatic CORS headers and return proper JSON responses.
+
+🧪 Testing (Optional)
+If enabled via BUILD_TESTS=ON in CMake:
 
 cd build
-ctest --output-on-failure
+ctest
 
-By default, it listens on http://localhost:8080.
+👥 Contributing
+Follow the C++17 standard
 
-🧪 Testing
-Run unit and functional tests using ctest:
+Document your modules and APIs
 
-cd build
-ctest --output-on-failure
+Keep routes isolated per domain (payments, catalogue, etc.)
 
-./unittests/test_suite
+Respect modularity: only import what you need
 
-📡 API Example
-🔹 GET Products of a Seller
+🧠 Future Modules
+inventory: Stock & warehouse tracking
 
-GET /api/seller/123/products HTTP/1.1
-Host: localhost:8080
-Accept: application/json
+shipping: Integration with delivery partners
 
-🔹POST Create a Product
+vendors: Marketplace account management
 
-POST /api/product/create HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
+ai: Recommendation engine, image classification
 
-{
-  "name": "Shirt",
-  "price": 24.99,
-  "category": "Men",
-  "seller_id": 123
-}
-
-
-🤝 Contribution Guidelines
-Please follow the internal coding standards (see CONTRIBUTING.md if available):
-
-Code must compile with the flags and options defined in CMakeLists.txt
-
-Write clean, readable, and tested code
-
-Each feature must include its corresponding unit tests if applicable
-
-📄 License
-© 2025 Softadastra Group – All Rights Reserved
-This repository is proprietary. Contact us for licensing or integration inquiries.
-
-🌍 About Softadastra
-Softadastra is a modern e-commerce marketplace connecting Uganda and the Democratic Republic of Congo, built to reduce friction in cross-border trade and empower local entrepreneurs.
-
-🔗 https://softadastra.com
+🏁 License
+This project is proprietary and maintained by Softadastra Group.
 
 ---
 
-Souhaites-tu que je te le génère dans un fichier `README.md` prêt à copier/coller ou te l’envoyer en fichier joint ?
+Would you like me to generate a short `CONTRIBUTING.md` next, or a `Makefile` wrapper for common tasks like `build`, `test`, `run`?
+
+
+
+

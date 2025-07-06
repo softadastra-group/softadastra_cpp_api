@@ -1,0 +1,144 @@
+{
+  "categories": [
+    {
+      "id": 18,
+      "name": "Generic",
+      "image": "category_680e9d7481e143.63589150.jpg",
+      "parent_id": 2,
+      "product_count": 12
+    },
+    {
+      "id": 92,
+      "name": "Pumps",
+      "image": "category_680f411a6d3e54.04155572.webp",
+      "parent_id": 3,
+      "product_count": 3
+    },
+    {
+      "id": 94,
+      "name": "Loafers",
+      "image": "category_680f41e19c4ef5.86241993.webp",
+      "parent_id": 3,
+      "product_count": 4
+    },
+    {
+      "id": 95,
+      "name": "Flip Flops",
+      "image": "category_680f41f5241047.93124878.webp",
+      "parent_id": 3,
+      "product_count": 0
+    },
+    {
+      "id": 96,
+      "name": "Work Shoes",
+      "image": "category_680f421a900db8.92852938.jpg",
+      "parent_id": 3,
+      "product_count": 0
+    },
+    {
+      "id": 109,
+      "name": "Backpacks",
+      "image": "category_680f4502761884.80525711.jpg",
+      "parent_id": 4,
+      "product_count": 0
+    },
+    {
+      "id": 110,
+      "name": "Travel Bags",
+      "image": "category_680f45180895e5.92574078.jpg",
+      "parent_id": 4,
+      "product_count": 0
+    },
+    {
+      "id": 111,
+      "name": "Clutches",
+      "image": "category_680f45306c8ca6.73322019.webp",
+      "parent_id": 4,
+      "product_count": 5
+    },
+    {
+      "id": 112,
+      "name": "Beach Bags",
+      "image": "category_680f45675fe499.27469476.jpg",
+      "parent_id": 4,
+      "product_count": 0
+    },
+    {
+      "id": 118,
+      "name": "Belts",
+      "image": "category_680f480c5cad49.82547086.jpeg",
+      "parent_id": 5,
+      "product_count": 0
+    },
+    {
+      "id": 119,
+      "name": "Scarves and Shawls",
+      "image": "category_680f4824c55a49.81044074.jpeg",
+      "parent_id": 5,
+      "product_count": 0
+    },
+    {
+      "id": 120,
+      "name": "Hats and Caps",
+      "image": "category_680f48437bece8.50256022.jpg",
+      "parent_id": 5,
+      "product_count": 0
+    },
+    {
+      "id": 121,
+      "name": "Sunglasses",
+      "image": "category_680f4864772592.41097224.webp",
+      "parent_id": 5,
+      "product_count": 0
+    },
+    {
+      "id": 122,
+      "name": "Gloves",
+      "image": "category_680f487c00b5c6.76901105.webp",
+      "parent_id": 5,
+      "product_count": 0
+    },
+    {
+      "id": 123,
+      "name": "Watches",
+      "image": "category_680f4892b03a63.21895540.jpg",
+      "parent_id": 5,
+      "product_count": 0
+    },
+    {
+      "id": 130,
+      "name": "Skincare",
+      "image": "category_680f4a04b42cc0.94892940.webp",
+      "parent_id": 6,
+      "product_count": 0
+    },
+    {
+      "id": 131,
+      "name": "Haircare",
+      "image": "category_680f4a16b327f7.01925166.webp",
+      "parent_id": 6,
+      "product_count": 7
+    },
+    {
+      "id": 132,
+      "name": "Fragrances",
+      "image": "category_680f4a394d6256.63419913.jpeg",
+      "parent_id": 6,
+      "product_count": 0
+    },
+    {
+      "id": 217,
+      "name": "Safety Shoes",
+      "image": "category_6810941d28ec77.24891023.jpg",
+      "parent_id": 144,
+      "product_count": 3
+    },
+    {
+      "id": 218,
+      "name": "Other Shoes",
+      "image": "category_6810946381c876.01431113.jpeg",
+      "parent_id": 144,
+      "product_count": 0
+    }
+  ]
+}

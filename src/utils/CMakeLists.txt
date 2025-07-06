@@ -1,15 +1,21 @@
-# Fichiers sources
-file(GLOB UTILS_SOURCES *.cpp)
+# ────────────────────────────────────────────────────────────────
+# 🛠️ Utils Module - CMake Configuration
+# This module provides utility functions used across the entire 
+# application (e.g., logging, environment loading, string helpers).
+# It is compiled as a static library and included by other modules.
+# ────────────────────────────────────────────────────────────────
 
-# Création de la bibliothèque utils
-add_library(utils OBJECT ${UTILS_SOURCES})
+# Gather all .cpp source files in the utils directory
+file(GLOB UTILS_SOURCES CONFIGURE_DEPENDS *.cpp)
 
-# Inclusions
+# Define the static library target for utils
+add_library(utils STATIC ${UTILS_SOURCES})
+
+# Public include paths to expose utils headers to other modules
 target_include_directories(utils PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/include/utils
 )
 
-# Options spécifiques
+# Suppress specific compiler warnings for deprecated APIs
 target_compile_options(utils PRIVATE -Wno-deprecated-declarations)
