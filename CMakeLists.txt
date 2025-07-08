@@ -96,6 +96,25 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(nlohmann_json)
 
+# ────────────────────────────────────────────────────────────────
+# 🧪 Catch2 (v3) - Modern C++ Testing Framework
+#
+# Utilisé pour les tests unitaires de tous les modules (products, categories, payments...).
+# Cette version inclut "Catch2::Catch2WithMain" qui génère automatiquement le point d'entrée
+# pour les binaires de test (pas besoin de définir un main()).
+#
+# 🧩 Site officiel : https://github.com/catchorg/Catch2
+# 📌 Avantage : Compatible C++17, simple, header-only
+# ────────────────────────────────────────────────────────────────
+FetchContent_Declare(
+    catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG v3.5.4
+    GIT_SHALLOW TRUE
+)
+
+FetchContent_MakeAvailable(catch2)
+
 # GoogleTest (optional)
 option(BUILD_TESTS "Enable unit tests" ON)
 if(BUILD_TESTS)

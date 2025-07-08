@@ -8,6 +8,7 @@
 file(GLOB_RECURSE PRODUCT_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/api/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/services/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/models/*.cpp
 )
 
 # Créer une bibliothèque statique 'product'

@@ -9,8 +9,8 @@ CategoryRepositoryJson::CategoryRepositoryJson(const std::string& filepath)
     : jsonFilePath(filepath) {}
 
 std::vector<Category> CategoryRepositoryJson::getLeafSubcategories(std::size_t offset, std::size_t limit) {
-    std::ifstream file(jsonFilePath);
-    if (!file.is_open()) {
+   std::ifstream file(jsonFilePath);
+    if (!file) {
         throw std::runtime_error("Impossible d'ouvrir le fichier JSON : " + jsonFilePath);
     }
 
@@ -29,7 +29,7 @@ std::vector<Category> CategoryRepositoryJson::getLeafSubcategories(std::size_t o
         if (!item.contains("id") || !item.contains("name") || !item.contains("image")) continue;
 
         std::optional<uint32_t> parentId;
-        if (!item["parent_id"].is_null()) {
+        if (item.contains("parent_id") && !item["parent_id"].is_null()) {
             parentId = item["parent_id"].get<uint32_t>();
         }
 

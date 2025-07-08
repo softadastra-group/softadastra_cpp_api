@@ -1,53 +1,50 @@
-#ifndef CATEGORY_CPP
-#define CATEGORY_CPP
+#ifndef CATEGORY_HPP
+#define CATEGORY_HPP
 
 #include <cstdint>
 #include <string>
 #include <optional>
 
 class Category {
-
 public:
-    Category(const std::string& name, const std::optional<std::uint32_t>& parent_id, const std::string& image_url)
-        : name_(name), parent_id_(parent_id), image_url_(image_url) {}
+    // ✅ Constructeur par défaut (utile pour les vecteurs, JSON, etc.)
+    Category()
+        : id_(0), name_(""), parent_id_(std::nullopt), image_url_("") {}
 
-    std::uint32_t getId() const {
-        return id_;
-    }
+    // ✅ Constructeur principal
+    Category(const std::string& name,
+             const std::optional<std::uint32_t>& parent_id,
+             const std::string& image_url)
+        : id_(0), name_(name), parent_id_(parent_id), image_url_(image_url) {}
 
-    void setId(const std::uint32_t id) {
-        id_ = id;
-    }
+    // ✅ Constructeur de copie
+    Category(const Category& other) = default;
 
-    const std::string& getName() const {
-        return name_;
-    }
+    // ✅ Constructeur par move
+    Category(Category&& other) noexcept = default;
 
-    void setName(const std::string& name) {
-        name_ = name;
-    }
+    // ✅ Opérateurs
+    Category& operator=(const Category& other) = default;
+    Category& operator=(Category&& other) noexcept = default;
 
-    std::optional<std::uint32_t> getParentId() const {
-        return parent_id_;
-    }
+    // ✅ Accesseurs
+    std::uint32_t getId() const { return id_; }
+    void setId(const std::uint32_t id) { id_ = id; }
 
-    void setParentId(const std::optional<std::uint32_t>& parent_id) {
-        parent_id_ = parent_id;
-    }
+    const std::string& getName() const { return name_; }
+    void setName(const std::string& name) { name_ = name; }
 
-    const std::string& getImageUrl() const {
-        return image_url_;
-    }
+    std::optional<std::uint32_t> getParentId() const { return parent_id_; }
+    void setParentId(const std::optional<std::uint32_t>& parent_id) { parent_id_ = parent_id; }
 
-    void setImageUrl(const std::string& image_url) {
-        image_url_ = image_url;
-    }
+    const std::string& getImageUrl() const { return image_url_; }
+    void setImageUrl(const std::string& image_url) { image_url_ = image_url; }
 
 private:
-    std::uint32_t id_;
+    std::uint32_t id_ = 0;
     std::string name_;
-    std::optional<std::uint32_t> parent_id_;  // ✅ DOIT être optional
+    std::optional<std::uint32_t> parent_id_;
     std::string image_url_;
 };
 
-#endif // CATEGORY_CPP
+#endif // CATEGORY_HPP
