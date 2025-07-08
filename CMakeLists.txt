@@ -1,3 +1,6 @@
+# Ajout manuel d'ASIO standalone
+include_directories(/opt/asio/asio/include)
+
 cmake_minimum_required(VERSION 3.14)
 
 # ────────────────────────────────────────────────────────────────
