@@ -11,6 +11,8 @@ public:
     CategoryRepositoryJson(const std::string& filepath);
     
     std::vector<Category> getLeafSubcategories(std::size_t offset = 0, std::size_t limit = 20);
+    std::vector<Category> getTopLevelCategories();
+    std::vector<Category> getAllCategories();
 
 private:
     std::string jsonFilePath;
