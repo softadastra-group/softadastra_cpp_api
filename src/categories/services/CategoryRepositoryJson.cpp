@@ -1,4 +1,4 @@
-#include "categories/CategoryRepositoryJson.hpp"
+#include "categories/services/CategoryRepositoryJson.hpp"
 #include <fstream>
 #include <stdexcept>
 #include <nlohmann/json.hpp>

@@ -1,5 +1,6 @@
 #include "utils/EnvLoader.hpp"
-#include "categories/category_routes.hpp"
+#include "categories/api/category_routes.hpp"
+#include "products/api/product_routes.hpp"
 
 #include <crow.h>
 #include <crow/middlewares/cors.h>
@@ -17,6 +18,7 @@ int main() {
     EnvLoader::load("../.env");
 
     registerCategoryRoutes(app);
+    registerProductRoutes(app);
 
     app.port(18080).multithreaded().run();
 

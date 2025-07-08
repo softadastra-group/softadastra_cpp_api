@@ -1,5 +1,5 @@
-#include "categories/category_routes.hpp"
-#include "categories/CategoryRepositoryJson.hpp"
+#include "categories/api/category_routes.hpp"
+#include "categories/services/CategoryRepositoryJson.hpp"
 #include <nlohmann/json.hpp>
 #include <cstdlib>
 
@@ -16,6 +16,24 @@ void registerCategoryRoutes(crow::App<crow::CORSHandler>& app) {
         item["parent_id"] = c.getParentId().has_value() ? json(c.getParentId().value()) : nullptr;
         return item;
     };
+
+    CROW_ROUTE(app, "/api")
+    ([] {
+        json doc = {
+            {"status", "Softadastra API en ligne 🚀"},
+            {"endpoints", {
+                {"GET /api/products/all", "Liste de tous les produits"},
+                {"GET /api/categories/all", "Toutes les catégories"},
+                {"GET /api/categories/leaf", "Sous-catégories (feuilles uniquement)"},
+                {"GET /api/categories/top", "Catégories racines (top-level)"}
+            }}
+        };
+
+        crow::response res(doc.dump(2));
+        res.set_header("Content-Type", "application/json");
+        return res;
+    });
+
 
     // 🔹 Feuilles
     CROW_ROUTE(app, "/api/categories/leaf")

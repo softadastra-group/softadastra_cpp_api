@@ -4,21 +4,29 @@
 # category-related source files, headers, and linked dependencies.
 # ────────────────────────────────────────────────────────────────
 
-# Automatically collect all .cpp files in this folder
-file(GLOB CATEGORY_SOURCES CONFIGURE_DEPENDS *.cpp)
-
-# Define a static library target called 'categories'
-add_library(categories STATIC ${CATEGORY_SOURCES})
-
-# Include paths so other modules can access headers
-target_include_directories(categories PUBLIC
-    ${PROJECT_SOURCE_DIR}/include
+# Collect all relevant source files in the categories module
+file(GLOB_RECURSE CATEGORY_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/services/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/models/*.cpp
 )
 
-# Link the category module with internal and external dependencies
+# Define the static library target
+add_library(categories STATIC ${CATEGORY_SOURCES})
+
+# Expose public headers to consumers
+target_include_directories(categories PUBLIC
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/include/categories
+    ${CMAKE_SOURCE_DIR}/include/categories/api
+    ${CMAKE_SOURCE_DIR}/include/categories/services
+    ${CMAKE_SOURCE_DIR}/include/categories/models
+)
+
+# Link with internal and external dependencies
 target_link_libraries(categories
-    utils                           # Internal utility library (e.g., EnvLoader, Logger)
-    tools                           # Internal tools shared across modules
-    crow                            # Crow framework for HTTP routing
-    nlohmann_json::nlohmann_json   # JSON parsing and serialization
+    utils                           # Logging, EnvLoader, etc.
+    tools                           # Shared utilities
+    crow                            # HTTP routing
+    nlohmann_json::nlohmann_json   # JSON
 )

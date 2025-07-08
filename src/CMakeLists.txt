@@ -13,6 +13,7 @@ add_subdirectory(tools)
 add_subdirectory(catalogue)
 add_subdirectory(payments)
 add_subdirectory(categories)
+add_subdirectory(products)
 
 # ────────────────────────────────────────────────────────────────
 # 📦 Collect all .cpp source files under this directory
@@ -40,6 +41,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     tools                            # Shared helpers
     payments                         # Payment gateway logic
     categories                       # Category management (routes, repo, service)
+    product                          # Product management (routes, repo, service)
 
     OpenSSL::SSL                     # SSL support (e.g. token signing, encryption)
     OpenSSL::Crypto

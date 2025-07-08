@@ -1,0 +1,1 @@
+#include "products/models/Product.hpp"

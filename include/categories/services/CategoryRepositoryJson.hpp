@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <cstdint>
-#include "categories/Category.hpp"
+#include "categories/models/Category.hpp"
 
 class CategoryRepositoryJson {
 public:
