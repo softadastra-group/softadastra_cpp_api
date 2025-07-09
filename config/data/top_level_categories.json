@@ -1,6 +1,5 @@
 {
-  "status": "success",
-  "data": [
+  "categories": [
     {
       "id": 1,
       "name": "Women",
