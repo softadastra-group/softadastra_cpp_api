@@ -1,48 +1,49 @@
-#include "products/api/product_routes.hpp"
-#include "products/services/ProductService.hpp"
-#include <nlohmann/json.hpp>
+#include "products/services/ProductCache.hpp"
+#include <crow.h>
+#include <crow/middlewares/cors.h>
 #include <cstdlib>
+#include <memory>
+#include <mutex>
 
-using json = nlohmann::json;
+static std::unique_ptr<ProductCache> g_productCache;
 
 void registerProductRoutes(crow::App<crow::CORSHandler>& app) {
-
     CROW_ROUTE(app, "/api/products/all")
     ([] {
+        const char* path = std::getenv("PRODUCT_JSON_PATH");
+        if (!path) {
+            return crow::response(500, "PRODUCT_JSON_PATH non défini");
+        }
+
+        static std::once_flag flag;
+        std::call_once(flag, [&](){
+            g_productCache = std::make_unique<ProductCache>(path);
+        });
+
         try {
-            const char* path = std::getenv("PRODUCT_JSON_PATH");
-            if (!path) {
-                return crow::response(500, "PRODUCT_JSON_PATH non défini");
-            }
+            auto& cache = *g_productCache;
+            auto responseStr = cache.getJsonResponse();
 
-            ProductService service(path);
-            auto products = service.getAllProducts();
-
-            json response;
-            response["data"] = json::array();
-
-            for (const auto& p : products) {
-                json productJson = {
-                    {"id", p.id},
-                    {"title", p.title},
-                    {"image_url", p.image_url},
-                    {"city_name", p.city_name},
-                    {"country_image_url", p.country_image_url},
-                    {"currency", p.currency},
-                    {"formatted_price", p.formatted_price},
-                    {"converted_price", p.converted_price},
-                    {"sizes", p.sizes},
-                    {"colors", p.colors}
-                };
-                response["data"].push_back(productJson);
-            }
-
-            crow::response res(response.dump());
+            crow::response res(responseStr);
             res.set_header("Content-Type", "application/json");
             return res;
-
         } catch (const std::exception& e) {
             return crow::response(500, std::string("Erreur : ") + e.what());
+        }
+    });
+
+    CROW_ROUTE(app, "/api/products/reload")
+    .methods("POST"_method)
+    ([] {
+        if (!g_productCache) {
+            return crow::response(500, "Cache non initialisé");
+        }
+
+        try {
+            g_productCache->reload();
+            return crow::response(200, "Cache rechargé avec succès");
+        } catch (const std::exception& e) {
+            return crow::response(500, std::string("Erreur lors du rechargement : ") + e.what());
         }
     });
 }

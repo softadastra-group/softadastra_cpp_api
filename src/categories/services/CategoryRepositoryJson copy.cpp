@@ -60,11 +60,12 @@ std::vector<Category> CategoryRepositoryJson::getTopLevelCategories() {
     json j;
     file >> j;
 
-    if (!j.contains("data") || !j["data"].is_array()) {
-        throw std::runtime_error("Fichier JSON invalide : clé 'data' manquante ou invalide");
+    // Clé 'categories' attendue, pas 'data'
+    if (!j.contains("categories") || !j["categories"].is_array()) {
+        throw std::runtime_error("Fichier JSON invalide : clé 'categories' manquante ou invalide");
     }
 
-    const auto& all = j["data"];
+    const auto& all = j["categories"];
     std::vector<Category> result;
 
     for (const auto& item : all) {
@@ -75,7 +76,7 @@ std::vector<Category> CategoryRepositoryJson::getTopLevelCategories() {
             parentId = item["parent_id"].get<uint32_t>();
         }
 
-        if (!parentId.has_value()) {
+        if (!parentId.has_value()) {  // Catégorie racine = pas de parent
             Category cat(
                 item["name"].get<std::string>(),
                 std::nullopt,
